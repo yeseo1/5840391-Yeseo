@@ -1,30 +1,30 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Æ®¸® ³ëµå¸¦ À§ÇÑ ±¸Á¶Ã¼ Á¤ÀÇ (¸µÅ© ±â¹İ Æ®¸®)
+// íŠ¸ë¦¬ ë…¸ë“œë¥¼ ìœ„í•œ êµ¬ì¡°ì²´ ì •ì˜
 typedef struct TreeNode {
     int data;
     struct TreeNode* left;
     struct TreeNode* right;
 } TreeNode;
 
-// ¹è¿­ ±â¹İ Æ®¸® »ı¼º
+// ë°°ì—´ ê¸°ë°˜ íŠ¸ë¦¬ ìƒì„±
 void GenerateArrayTree(int* tree) {
-    int list[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };  // Æ®¸® ³ëµå °ª
+    int list[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };  // íŠ¸ë¦¬ ë…¸ë“œ ê°’
 
     for (int i = 0; i < 15; i++) {
         tree[i] = list[i];
     }
 
-    // ¹è¿­ ±â¹İ Æ®¸® Ãâ·Â
+    // ë°°ì—´ ê¸°ë°˜ íŠ¸ë¦¬ ì¶œë ¥
     printf("Array-based Tree: ");
     for (int i = 0; i < 15; i++) {
         printf("%d ", tree[i]);
     }
-    printf("\n\n");  // Ãâ·Â ÈÄ ÇÑ ÁÙ ¶ç¿ì±â
+    printf("\n\n"); // í•œ ì¤„ ë„ìš°ê¸°
 }
 
-// ÀüÀ§ ¼øÈ¸ (Pre-order) - ¹è¿­ ±â¹İ
+// ì „ìœ„ ìˆœíšŒ (Pre-order) - ë°°ì—´ ê¸°ë°˜
 void arraypreorder(int* tree, int index) {
     if (index >= 15) return;
     printf("%d ", tree[index]);
@@ -32,7 +32,7 @@ void arraypreorder(int* tree, int index) {
     arraypreorder(tree, 2 * index + 2);
 }
 
-// ÁßÀ§ ¼øÈ¸ (In-order) - ¹è¿­ ±â¹İ
+// ì¤‘ìœ„ ìˆœíšŒ (In-order) - ë°°ì—´ ê¸°ë°˜
 void arrayinorder(int* tree, int index) {
     if (index >= 15) return;
     arrayinorder(tree, 2 * index + 1);
@@ -40,7 +40,7 @@ void arrayinorder(int* tree, int index) {
     arrayinorder(tree, 2 * index + 2);
 }
 
-// ÈÄÀ§ ¼øÈ¸ (Post-order) - ¹è¿­ ±â¹İ
+// í›„ìœ„ ìˆœíšŒ (Post-order) - ë°°ì—´ ê¸°ë°˜
 void arraypostorder(int* tree, int index) {
     if (index >= 15) return;
     arraypostorder(tree, 2 * index + 1);
@@ -48,7 +48,7 @@ void arraypostorder(int* tree, int index) {
     printf("%d ", tree[index]);
 }
 
-// ¹è¿­ ±â¹İ Æ®¸® ¼øÈ¸ È£Ãâ
+// ë°°ì—´ ê¸°ë°˜ íŠ¸ë¦¬ ìˆœíšŒ í˜¸ì¶œ
 void arrayorders(int* tree) {
     printf("Array Pre-order: ");
     arraypreorder(tree, 0);
@@ -60,10 +60,10 @@ void arrayorders(int* tree) {
 
     printf("Array Post-order: ");
     arraypostorder(tree, 0);
-    printf("\n\n");  // ¼øÈ¸ °á°ú Ãâ·Â ÈÄ ÇÑ ÁÙ ¶ç¿ì±â
+    printf("\n");
 }
 
-// ³ëµå »ı¼º ÇÔ¼ö (¸µÅ© ±â¹İ Æ®¸®)
+// ë…¸ë“œ ìƒì„± í•¨ìˆ˜ (ë§í¬ ê¸°ë°˜ íŠ¸ë¦¬)
 TreeNode* createNode(int data) {
     TreeNode* newNode = (TreeNode*)malloc(sizeof(TreeNode));
     newNode->data = data;
@@ -72,50 +72,49 @@ TreeNode* createNode(int data) {
     return newNode;
 }
 
-// ³ëµå¸¦ ÇØ´ç À§Ä¡¿¡ ¹èÄ¡ÇÏ´Â ÇÔ¼ö
+// ë…¸ë“œë¥¼ í•´ë‹¹ ìœ„ì¹˜ì— ë°°ì¹˜í•˜ëŠ” í•¨ìˆ˜
 void placenode(TreeNode* node, int direction, TreeNode* newNode) {
     if (direction == 0) {
         node->left = newNode;
-    }
-    else {
+    } else {
         node->right = newNode;
     }
 }
 
-// ¸µÅ© ±â¹İ Æ®¸® »ı¼º
+// ë§í¬ ê¸°ë°˜ íŠ¸ë¦¬ ìƒì„±
 TreeNode* GenerateLinkTree() {
     TreeNode* root = createNode(1);
-    placenode(root, 0, createNode(2));  // ¿ŞÂÊ ÀÚ½Ä
-    placenode(root, 1, createNode(3));  // ¿À¸¥ÂÊ ÀÚ½Ä
+    placenode(root, 0, createNode(2));  // ì™¼ìª½ ìì‹
+    placenode(root, 1, createNode(3));  // ì˜¤ë¥¸ìª½ ìì‹
 
-    // 2ÀÇ ÀÚ½Ä
+    // 2ì˜ ìì‹
     placenode(root->left, 0, createNode(4));
     placenode(root->left, 1, createNode(5));
 
-    // 3ÀÇ ÀÚ½Ä
+    // 3ì˜ ìì‹
     placenode(root->right, 0, createNode(6));
     placenode(root->right, 1, createNode(7));
 
-    // 4ÀÇ ÀÚ½Ä
+    // 4ì˜ ìì‹
     placenode(root->left->left, 0, createNode(8));
     placenode(root->left->left, 1, createNode(9));
 
-    // 5ÀÇ ÀÚ½Ä
+    // 5ì˜ ìì‹
     placenode(root->left->right, 0, createNode(10));
     placenode(root->left->right, 1, createNode(11));
 
-    // 6ÀÇ ÀÚ½Ä
+    // 6ì˜ ìì‹
     placenode(root->right->left, 0, createNode(12));
     placenode(root->right->left, 1, createNode(13));
 
-    // 7ÀÇ ÀÚ½Ä
+    // 7ì˜ ìì‹
     placenode(root->right->right, 0, createNode(14));
     placenode(root->right->right, 1, createNode(15));
 
     return root;
 }
 
-// ÀüÀ§ ¼øÈ¸ (Pre-order) - ¸µÅ© ±â¹İ
+// ì „ìœ„ ìˆœíšŒ (Pre-order) - ë§í¬ ê¸°ë°˜
 void linkpreorder(TreeNode* node) {
     if (node == NULL) return;
     printf("%d ", node->data);
@@ -123,7 +122,7 @@ void linkpreorder(TreeNode* node) {
     linkpreorder(node->right);
 }
 
-// ÁßÀ§ ¼øÈ¸ (In-order) - ¸µÅ© ±â¹İ
+// ì¤‘ìœ„ ìˆœíšŒ (In-order) - ë§í¬ ê¸°ë°˜
 void linkinorder(TreeNode* node) {
     if (node == NULL) return;
     linkinorder(node->left);
@@ -131,7 +130,7 @@ void linkinorder(TreeNode* node) {
     linkinorder(node->right);
 }
 
-// ÈÄÀ§ ¼øÈ¸ (Post-order) - ¸µÅ© ±â¹İ
+// í›„ìœ„ ìˆœíšŒ (Post-order) - ë§í¬ ê¸°ë°˜
 void linkpostorder(TreeNode* node) {
     if (node == NULL) return;
     linkpostorder(node->left);
@@ -139,7 +138,7 @@ void linkpostorder(TreeNode* node) {
     printf("%d ", node->data);
 }
 
-// ¸µÅ© ±â¹İ Æ®¸® ¼øÈ¸ È£Ãâ
+// ë§í¬ ê¸°ë°˜ íŠ¸ë¦¬ ìˆœíšŒ í˜¸ì¶œ
 void linkorders(TreeNode* root) {
     printf("Link Pre-order: ");
     linkpreorder(root);
@@ -151,17 +150,17 @@ void linkorders(TreeNode* root) {
 
     printf("Link Post-order: ");
     linkpostorder(root);
-    printf("\n\n");  // ¼øÈ¸ °á°ú Ãâ·Â ÈÄ ÇÑ ÁÙ ¶ç¿ì±â
+    printf("\n");
 }
 
 int main() {
     int arr[15];
 
-    // ¹è¿­ ±â¹İ Æ®¸® »ı¼º ¹× ¼øÈ¸
+    // ë°°ì—´ ê¸°ë°˜ íŠ¸ë¦¬ ìƒì„± ë° ìˆœíšŒ
     GenerateArrayTree(arr);
     arrayorders(arr);
 
-    // ¸µÅ© ±â¹İ Æ®¸® »ı¼º ¹× ¼øÈ¸
+    // ë§í¬ ê¸°ë°˜ íŠ¸ë¦¬ ìƒì„± ë° ìˆœíšŒ
     TreeNode* root = GenerateLinkTree();
     linkorders(root);
 
