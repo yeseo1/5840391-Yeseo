@@ -11,7 +11,7 @@ typedef struct ThreadNode {
     int data;
     struct ThreadNode* left;
     struct ThreadNode* right;
-    int is_thread;  // ½º·¹µåÀÎÁö ¿©ºÎ¸¦ ³ªÅ¸³¿
+    int is_thread;  // ìŠ¤ë ˆë“œì¸ì§€ ì—¬ë¶€ë¥¼ ë‚˜íƒ€ëƒ„
 } ThreadNode;
 
 extern void free_binary_tree(TreeNode* root);
