@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "4-binarythread.h"
 
-// ÀÌÁø Å½»ö Æ®¸®¿¡ µ¥ÀÌÅÍ »ğÀÔ
+// ì´ì§„ íƒìƒ‰ íŠ¸ë¦¬ì— ë°ì´í„° ì‚½ì…
 TreeNode* InsertToBST(TreeNode* root, int data) {
     if (root == NULL) {
         root = (TreeNode*)malloc(sizeof(TreeNode));
@@ -19,7 +19,7 @@ TreeNode* InsertToBST(TreeNode* root, int data) {
     return root;
 }
 
-// ÀÌÁø Æ®¸® »ı¼º
+// ì´ì§„ íŠ¸ë¦¬ ìƒì„±
 TreeNode* GenerateBinaryTree(int inputData[], int size) {
     TreeNode* root = NULL;
     for (int i = 0; i < size; i++) {
@@ -28,7 +28,7 @@ TreeNode* GenerateBinaryTree(int inputData[], int size) {
     return root;
 }
 
-// ÀÌÁø Æ®¸® ÁßÀ§ ¼øÈ¸
+// ì´ì§„ íŠ¸ë¦¬ ì¤‘ìœ„ ìˆœíšŒ
 void BinaryTreeInOrder(TreeNode* root) {
     if (root != NULL) {
         BinaryTreeInOrder(root->left);
@@ -37,7 +37,7 @@ void BinaryTreeInOrder(TreeNode* root) {
     }
 }
 
-// ½º·¹µå ÀÌÁø Æ®¸®·Î º¯È¯
+// ìŠ¤ë ˆë“œ ì´ì§„ íŠ¸ë¦¬ë¡œ ë³€í™˜
 void ConvertToThreaded(TreeNode* root, ThreadNode** prev) {
     if (root == NULL) return;
 
@@ -59,16 +59,16 @@ void ConvertToThreaded(TreeNode* root, ThreadNode** prev) {
     ConvertToThreaded(root->right, prev);
 }
 
-// ½º·¹µå ÀÌÁø Æ®¸® »ı¼º
+// ìŠ¤ë ˆë“œ ì´ì§„ íŠ¸ë¦¬ ìƒì„±
 ThreadNode* GenerateThreadTree(int inputData[], int size) {
     TreeNode* bstRoot = GenerateBinaryTree(inputData, size);
     ThreadNode* prev = NULL;
     ConvertToThreaded(bstRoot, &prev);
-    free_binary_tree(bstRoot);  // ÀÌÁø Æ®¸® ¸Ş¸ğ¸® ÇØÁ¦
+    free_binary_tree(bstRoot);  // ì´ì§„ íŠ¸ë¦¬ ë©”ëª¨ë¦¬ í•´ì œ
     return prev;
 }
 
-// ½º·¹µå ÀÌÁø Æ®¸® ÁßÀ§ ¼øÈ¸
+// ìŠ¤ë ˆë“œ ì´ì§„ íŠ¸ë¦¬ ì¤‘ìœ„ ìˆœíšŒ
 void ThreadTreeInOrder(ThreadNode* root) {
     ThreadNode* current = root;
     while (current != NULL) {
@@ -85,7 +85,7 @@ void ThreadTreeInOrder(ThreadNode* root) {
     }
 }
 
-// ÀÌÁø Æ®¸® ¸Ş¸ğ¸® ÇØÁ¦
+// ì´ì§„ íŠ¸ë¦¬ ë©”ëª¨ë¦¬ í•´ì œ
 void free_binary_tree(TreeNode* root) {
     if (root == NULL) return;
     free_binary_tree(root->left);
@@ -93,7 +93,7 @@ void free_binary_tree(TreeNode* root) {
     free(root);
 }
 
-// ½º·¹µå ÀÌÁø Æ®¸® ¸Ş¸ğ¸® ÇØÁ¦
+// ìŠ¤ë ˆë“œ ì´ì§„ íŠ¸ë¦¬ ë©”ëª¨ë¦¬ í•´ì œ
 void free_thread_tree(ThreadNode* root) {
     if (root == NULL) return;
     free_thread_tree(root->left);
@@ -101,7 +101,7 @@ void free_thread_tree(ThreadNode* root) {
     free(root);
 }
 
-// ¸ŞÀÎ ÇÔ¼ö
+// ë©”ì¸ í•¨ìˆ˜
 int main() {
     int inputData[] = { 4, 1, 9, 13, 15, 3, 6, 14, 7, 10, 12, 2, 5, 8, 11 };
     int size = sizeof(inputData) / sizeof(inputData[0]);
@@ -116,8 +116,8 @@ int main() {
     ThreadTreeInOrder(troot);
     printf("\n");
 
-    free_binary_tree(root);  // ÀÌÁø Æ®¸® ¸Ş¸ğ¸® ÇØÁ¦
-    free_thread_tree(troot);  // ½º·¹µå ÀÌÁø Æ®¸® ¸Ş¸ğ¸® ÇØÁ¦
+    free_binary_tree(root);  // ì´ì§„ íŠ¸ë¦¬ ë©”ëª¨ë¦¬ í•´ì œ
+    free_thread_tree(troot);  // ìŠ¤ë ˆë“œ ì´ì§„ íŠ¸ë¦¬ ë©”ëª¨ë¦¬ í•´ì œ
 
     return 0;
 }
