@@ -1,2 +1,2 @@
 # MAX HEAP TREE RESULT
-![](./maxheaptree result.png)
+![](5-maxheaptree/5-maxheaptree result.png)
