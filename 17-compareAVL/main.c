@@ -8,17 +8,17 @@ int main(int argc, char* argv[]) {
 	srand(time(NULL));
 	float allCount = 0.0;
 
-	// °úÁ¦¿¡¼­ Á¦½ÃµÈ AVL¿¡ ´ëÇÑ 2000È¸ Batch ÀÛ¾÷À» ¼öÇàÇÑ´Ù.
+	//AVLì— ëŒ€í•œ 2000íšŒ Batch ì‘ì—…ì„ ìˆ˜í–‰í•œë‹¤.
 	doAVLBatch(root);
 	allCount = (float)compareCount / searchCount;
 		printf("average AVL compare count: %.2f\n", allCount);
 
-	// ÈÄÀ§¼øÈ¸ÇÏ¸ç AVLÆ®¸®·Î ¸¸µé¾îÁ³´ø ¸ğµç µ¥ÀÌÅÍ¸¦ free
+	// í›„ìœ„ìˆœíšŒí•˜ë©° AVLíŠ¸ë¦¬ë¡œ ë§Œë“¤ì–´ì¡Œë˜ ëª¨ë“  ë°ì´í„°ë¥¼ free
 	freeTree(root);
 	root = NULL;
 	compareCount = allCount = 0;
 
-	// °úÁ¦¿¡¼­ Á¦½ÃµÈ Binary Search Tree Batch¸¦ ¼öÇàÇÑ´Ù.
+	//Binary Search Tree Batchë¥¼ ìˆ˜í–‰í•œë‹¤.
 	doBinaryBatch(root);
 	allCount = (float)compareCount / searchCount;
 	printf("average Bin compare count: %.2f\n", allCount);
